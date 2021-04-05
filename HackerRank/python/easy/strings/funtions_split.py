@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 
 def clean_coefficient(function):
@@ -20,3 +21,5 @@ matriz = []
 for i in range(4):
     matriz.append(clean_coefficient(input()))
 
+np.array(matriz)
+pass
