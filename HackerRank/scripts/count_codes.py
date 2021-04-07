@@ -12,7 +12,7 @@ def buscar_archivos(ruta):
     return listar_archivos
 
 
-def leer(ruta_archivo, df, codes):
+def leer(ruta_archivo, df, codes, index):
     dict_temporal = {}
     archivo = open(ruta_archivo, encoding='utf-8').read()
     info_archivo = ruta_archivo.split('/')[-1].split("_")
@@ -24,7 +24,8 @@ def leer(ruta_archivo, df, codes):
     for new_code in list(new_codes):
         df[new_code] = 0
     for code_temporal in list(codes_temporal):
-        count_code = archivo.count(r'"code":"%s"' % re.escape(code_temporal))
+        count_code = len(
+            tuple(re.finditer(r'(\d{2}:\d{2}:\d{2})[^\n]*\"code\"\:\"(%s)\"' % re.escape(code_temporal), archivo)))
         if dict_temporal.get(code_temporal, None):
             dict_temporal[code_temporal] += count_code
         else:
@@ -33,6 +34,7 @@ def leer(ruta_archivo, df, codes):
         dict_temporal['FECHA'] = fecha
         dict_temporal['SERIAL_POS'] = id_terminal
         df = df.append(dict_temporal, ignore_index=True)
+    print(f'{int(index * 100 / len(lista_carpetas))}% Completado')
     return df, codes
 
 
@@ -43,10 +45,10 @@ if __name__ == '__main__':
     df = pd.DataFrame(
         columns=['FECHA', 'SERIAL_POS'] + codes)
     dict_temporal = {}
-    for carpeta in lista_carpetas:
-        ruta = f'{ruta_carpetas}/{carpeta}/*.txt'
+    for index in range(len(lista_carpetas)):
+        ruta = f'{ruta_carpetas}/{lista_carpetas[index]}/*.txt'
         for archivo in buscar_archivos(ruta):
-            df, codes = leer(archivo, df, codes)
+            df, codes = leer(archivo, df, codes, index)
     df = df.fillna(0)
     df[list(codes)] = df[list(codes)].astype(int)
     df = df.groupby(['FECHA', 'SERIAL_POS']).sum().reset_index()
@@ -54,4 +56,3 @@ if __name__ == '__main__':
     df = df.drop(['SERIAL_POS'], axis=1)
     df = df.groupby(['FECHA']).sum().reset_index()
     df.to_csv('codes_groupby_fecha.csv', index=False)
-

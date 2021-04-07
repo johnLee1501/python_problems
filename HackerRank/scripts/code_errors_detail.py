@@ -26,7 +26,7 @@ def leer(ruta_archivo, df, index):
                 df = df.append(
                     {'FECHA': fecha, 'HORA': code_record[0], 'SERIAL_POS': id_terminal, 'CODE': code_record[1]},
                     ignore_index=True)
-    print(f'{int(index*100/len(lista_carpetas))}% Completado')
+    print(f'{int(index * 100 / len(lista_carpetas))}% Completado')
     return df
 
 
