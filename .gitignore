@@ -140,3 +140,5 @@ target/
 .classpath
 .project
 /media
+Kaggle/data/Libro3.xlsx
+Kaggle/pandas/transaction_bcp.csv
