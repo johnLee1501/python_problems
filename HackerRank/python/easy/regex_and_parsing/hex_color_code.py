@@ -1,5 +1,15 @@
 import re
 
+pattern = r'(#[0-9A-F]{6}|#[0-9A-F]{3})(?!\s*\{)'
+n = int(input())
+code = "".join([input() for _ in range(n)])
+list_colors = re.findall(pattern, code, flags=re.I)
+print(*list_colors, sep='\n')
+
+"""
+#SOLUTION N1
+import re
+
 pattern_colors = r'(#[0-9A-F]{3}|#[0-9A-F]{6})[^0-9A-F]'
 pattern_selectors = r'(#[0-9A-F]{3}|#[0-9A-F]{6})\s*\{'
 n = int(input())
@@ -8,6 +18,7 @@ list_colors = re.findall(pattern_colors, code, flags=re.I)
 list_selectors = re.findall(pattern_selectors, code, flags=re.I)
 list_correct_colors = [color for color in list_colors if color not in list_selectors]
 print(*list_correct_colors, sep='\n')
+"""
 
 # INPUT
 """
