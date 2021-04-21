@@ -1,0 +1,6 @@
+n = int(input())
+n_set = set(map(int, input().split()))
+b = int(input())
+b_set = set(map(int, input().split()))
+nb_list = sorted(list(n_set ^ b_set))
+print(*(number for number in nb_list), sep='\n')
