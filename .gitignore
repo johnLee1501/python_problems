@@ -139,7 +139,7 @@ target/
 .settings/
 .classpath
 .project
-.csv
+*.csv
 /media
 Kaggle/data/
 data
