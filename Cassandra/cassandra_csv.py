@@ -8,24 +8,24 @@ KEYSPACE = "pricepred"
 cluster = Cluster(['127.0.0.1'])
 session = cluster.connect()
 
-# session.execute("""
-#     CREATE KEYSPACE IF NOT EXISTS %s
-#     WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}
-#     """ % KEYSPACE)
+session.execute("""
+    CREATE KEYSPACE IF NOT EXISTS %s
+    WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}
+    """ % KEYSPACE)
 
 session.set_keyspace(KEYSPACE)
-# session.execute(
-#     """CREATE TABLE prices (
-#   rank2014 int,
-#   city varchar,
-#   state varchar,
-#   statecode varchar,
-#   popest2014 int,
-#   medprice2015 float,
-#   PRIMARY KEY (city, state, statecode)
-# );
-# """
-# )
+session.execute(
+    """CREATE TABLE prices (
+  rank2014 int,
+  city varchar,
+  state varchar,
+  statecode varchar,
+  popest2014 int,
+  medprice2015 float,
+  PRIMARY KEY (city, state, statecode)
+);
+"""
+)
 
 prepared = session.prepare("""
         INSERT INTO prices (rank2014, city, state, statecode, popest2014, medprice2015)
