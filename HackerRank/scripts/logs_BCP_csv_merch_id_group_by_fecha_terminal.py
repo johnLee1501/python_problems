@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 ruta_carpetas = r'C:/WPOSS/LOGS_BCP'
-ruta_serial_merch_id = r'.\serial_merch_id.csv'
+ruta_serial_merch_id = r'..\..\data\serial_merch_id.csv'
 lista_carpetas = os.listdir(ruta_carpetas)
 
 

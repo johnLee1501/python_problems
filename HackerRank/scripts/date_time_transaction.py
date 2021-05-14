@@ -5,7 +5,7 @@ import os
 import re
 
 path_main_folder = r'C:/WPOSS/LOGS_BCP'
-path_serial_merch_id = r'.\serial_merch_id.csv'
+path_serial_merch_id = r'..\..\data\serial_merch_id.csv'
 list_folder = os.listdir(path_main_folder)
 dict_trx = {
     'URL https://www.conex.agentesbcp.com/channel/ageb/v1/deposit/confirm-voucher-print': 'DEPÓSITOS PROCESADOS',
