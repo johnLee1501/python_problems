@@ -3,8 +3,9 @@ import operator
 
 def person_lister(f):
     def inner(people):
-        return map(f, sorted(people, key=lambda x: x[2]))
-        # return map(f, sorted([[e[0], e[1], int(e[2]), e[3]] for e in people], key=operator.itemgetter(2)))
+        people.sort(key=lambda x: int(x[2]))
+        return [f(person) for person in people]
+
     return inner
 
 
