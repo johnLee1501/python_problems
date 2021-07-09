@@ -66,7 +66,6 @@ def generar_lista_tiempos(lista_transaccion):
 
 if __name__ == '__main__':
 
-    
     df_all = pd.DataFrame(columns=['Fecha', 'Serial_POS', 'DEPOSITO',
                                    'RETIRO', 'CONSULTA', 'GIRO_EMISION',
                                    'GIRO_COBRO'], dtype='object')
